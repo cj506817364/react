@@ -1,0 +1,55 @@
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>PPJ</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="bower_components/react/react.js"></script>
+<script src="bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+    var MessageBox = React.createClass({
+        render:function () {
+            var submessages = [];
+            for (var ii=0;ii<10;ii++){
+                submessages.push(
+                    <Submessage key={'sub'+ii}/>
+                )
+            }
+
+            return (
+                <div>
+                    <h1>你好世界!!!</h1>
+                    {submessages}
+                </div>
+            )
+        }
+    });
+
+    var Submessage = React.createClass({
+        render:function () {
+            return (
+                <div>
+                    <h2>今天天气不错</h2>
+                    <Folder />
+                </div>
+            )
+        }
+    });
+
+    var Folder = React.createClass({
+        render:function () {
+            return(
+                <h3>今天可以早点下班</h3>
+            )
+        }
+    });
+
+    React.render(<MessageBox/>,
+        document.getElementById('app'),
+    function () {
+        console.log('渲染完成!');
+    })
+</script>
+</body>
+</html>

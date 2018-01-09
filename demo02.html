@@ -1,0 +1,48 @@
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>PPJ</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="bower_components/react/react.js"></script>
+<script src="bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+    var MessageBox = React.createClass({
+        getInitialState:function () {
+            return {
+                isVisible:true,
+                titleMessage:'你好世界(来自ppj哦)',
+            }
+        },
+        render:function(){
+            var styleObj={
+                display:this.state.isVisible ? 'none' : 'block',
+            }
+
+            return (
+                <div>
+                    <h1 style={styleObj}>{this.state.titleMessage}</h1>
+                    <Submessage/>
+                </div>
+            )
+        }
+    });
+
+    var Submessage = React.createClass({
+        render:function () {
+            return (
+                <h2>今天天气不错</h2>
+            )
+        }
+    });
+
+
+    var messageBox = React.render(<MessageBox/>,
+        document.getElementById('app'),
+    function () {
+        console.log('渲染完成!');
+    })
+</script>
+</body>
+</html>

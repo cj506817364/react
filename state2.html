@@ -1,0 +1,35 @@
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>PPJ</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="bower_components/react/react.js"></script>
+<script src="bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+   var ClickApp = React.create({
+       getInitialState:function () {
+           return {
+               clickCount : 0,
+           },
+           handleClick:function(){
+               this.setState({
+                   clickCount:this
+               })
+           }
+
+           render : function () {
+               return (
+                   <div>
+                       <h2>点击下面按钮</h2>
+                       <button>点击我</button>
+                       <p>你一共点击了:{this.stae.clickCount}</p>
+                   </div>
+               )
+           };
+       }
+   })
+</script>
+</body>
+</html>
