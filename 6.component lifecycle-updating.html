@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PPJ</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="bower_components/react/react.js"></script>
+<script src="bower_components/react/JSXTransformer.js"></script>
+<script type="text/jsx">
+    var ClickApp = React.createClass({
+        getDefaultProps: function () {
+        },
+        getInitialState: function () {
+            return {
+                count: 0,
+            }
+        },
+        // componentWillMount:function () {
+        // },
+        // componentDidMount:function () {
+        // },
+        // componentWillUnmount:function () {
+        // },
+        shouldComponentUpdate: function (nextProp, nextState) {
+            console.log('父组件:shouldComponentUpdate');
+            if (nextState.count > 10) return false;
+            return true;
+        },
+        componentWillUpdate: function (nextProp, nextState) {
+            console.log('父组件:componentWillUpdate');
+        },
+        componentDidUpdate: function () {
+            console.log('父组件:componentDidUpdate');
+        },
+        killMySelf: function () {
+            React.unmountComponentAtNode(document.getElementById('app'));
+        },
+        doUpdate: function () {
+            this.setState({
+                count: this.state.count + 1.
+            })
+        },
+        render: function () {
+            console.log('父组件:渲染');
+            return (
+                <div>
+                    <h1>{this.state.count}</h1>
+                    <button onClick={this.killMySelf}>卸载掉这个组件</button>
+                    <button onClick={this.doUpdate}>手动更新一下组件(包括子组件)</button>
+                    <Submessage count={this.state.count}/>
+                </div>
+            )
+        }
+    });
+
+    var Submessage = React.createClass({
+        componentWillReceiveProps: function (nextProp) {
+            console.log('子组件将要获得Props');
+        },
+    shouldComponentUpdate:function (nextProp,nextState) {
+        console.log('子组件shouldComponentUpdate');
+        if(nextProp.count > 5) return false;
+            return true;
+        },
+        render: function () {
+            console.log('渲染');
+            return (
+                <h3>当前计数时:{this.props.count}</h3>
+            )
+        }
+    });
+    React.render(
+        <ClickApp/>,
+        document.getElementById('app')
+    )
+</script>
+</body>
+</html>
